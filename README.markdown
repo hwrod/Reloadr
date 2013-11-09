@@ -1,3 +1,8 @@
+## Recursive Reloadr
+
+This version of reloadr looks at directories recursively, so you can just supply "*.ext" to Reloadr, and it will refresh regardless of deep-nested directory structures.
+It also adds localStorage support for enabling/disabling Reloadr.
+
 # Reloadr
 
 ## The Problem
