@@ -21,14 +21,17 @@ TO USE: include reloadr.js and tell it what to check:
 	]);
 */
 
+
 var Reloadr = {
 	options: {
 		frequency: 2000,
 		client: [],
 		server: [],
-		path: '/reloadr.php'
+		path: '/reloadr.php',
 	},
 	req: new XMLHttpRequest(),
+	disable: function(){ localStorage.setItem("reloadrDisabled", "true"); },
+	enable: function(){ localStorage.setItem("reloadrDisabled", "false"); },
 	timeout: null,
 	watch: function(options) { this.go.call(this, options); },
 	go: function(options) {
@@ -49,6 +52,8 @@ var Reloadr = {
 		}, this.options.frequency);
 	},
 	ajax: function(url, callback) {
+        if (localStorage.getItem("reloadrDisabled")==="true") return;
+        
 		this.req.open("GET", url, false);
 		this.req.setRequestHeader('If-Modified-Since', window._Reloadr_LoadTime.toUTCString());
 		this.req.send(null);
